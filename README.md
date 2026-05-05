@@ -4,10 +4,10 @@
 
 This is the working area for the individual Internet-Draft, "Extended Diagnostic Notation (EDN) Use with Transport Layer Security (TLS) Presentation Language (PL) Objects".
 
-* [Editor's Copy](https://rohanmahy.github.io/cbor-edn-for-tls/#go.draft-cbor-edn-for-tls.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-cbor-edn-for-tls)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-cbor-edn-for-tls)
-* [Compare Editor's Copy to Individual Draft](https://rohanmahy.github.io/cbor-edn-for-tls/#go.draft-cbor-edn-for-tls.diff)
+* [Editor's Copy](https://rohanmahy.github.io/cbor-edn-for-tls/#go.draft-mahy-cbor-edn-for-tls.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-mahy-cbor-edn-for-tls)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-mahy-cbor-edn-for-tls)
+* [Compare Editor's Copy to Individual Draft](https://rohanmahy.github.io/cbor-edn-for-tls/#go.draft-mahy-cbor-edn-for-tls.diff)
 
 
 ## Contributing
