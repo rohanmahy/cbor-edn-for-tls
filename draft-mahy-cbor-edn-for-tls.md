@@ -20,7 +20,7 @@ venue:
 #  mail: WG@example.com
 #  arch: https://example.com/WG
   github: "rohanmahy/cbor-edn-for-tls"
-  latest: "https://rohanmahy.github.io/cbor-edn-for-tls/draft-cbor-edn-for-tls.html"
+  latest: "https://rohanmahy.github.io/cbor-edn-for-tls/draft-mahy-cbor-edn-for-tls.html"
 
 author:
  -
