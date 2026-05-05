@@ -36,7 +36,7 @@ informative:
 --- abstract
 
 Extended Diagnostic Notation was designed as a superset of JSON to represent CBOR instance documents in human-readable format.
-This document describes how it can be used to represent instances encoded using TLS Presentation Language.
+This document describes how it can be used to represent instances encoded using the TLS Presentation Language.
 
 
 --- middle
@@ -45,13 +45,14 @@ This document describes how it can be used to represent instances encoded using 
 
 Extended Diagnostic Notation (EDN) {{!I-D.ietf-cbor-edn-literals}} is a text format, that was originally described to represent CBOR messages as diagnostic notation in {{?RFC7094}} and then expanded in {{?RFC8949}}.
 It is a superset of JSON (all valid JSON is valid EDN) that can natively represent binary content, non-finite floating point values, and additional data types (tags and simple values).
-Since then it has been used to represent YAML messages that contain binary content.
+Since then it has been used to represent YAML messages, especially those that contain binary content or tags.
 
 This document defines a convention to represent instances of binary sequences--encoded using the TLS Presentation Language (TLS PL) defined in {{Section 3 of !RFC8446}}--using EDN.
 TLS encoding is used in several other protocols, for example in the Messaging Layer Security (MLS) protocol {{?RFC9420}} and the MIMI protocol {{?I-D.ietf-mimi-protocol}}.
 
 TLS PL has a very limited set of patterns.
 It deals primarily with structs and enums.
+As a result, it is relatively straightforward to represent TLS encoded data if the TLS PL definitions are available.
 
 
 # Conventions and Definitions
@@ -62,30 +63,64 @@ It deals primarily with structs and enums.
 # Representation of TLS PL in EDN
 
 EDN Representations of TLS-encoded instance data always start with the following comment line: `# ~~~ tls ` followed by the struct name, and end with the following comment line: `# ~~~`.
+This allows a processor that knows TLS to convert an EDN document back into TLS-encoded binary data.
 
-Instances of TLS-encoded structs are represented as maps with the keys equal to the names of the members.
+Instances of TLS-encoded structs are represented in EDN as maps with the keys equal to the names of the members.
 
-If an enum named "Bool" or "Boolean" (with any capitalization) appears with only the values `false (0)` and `true (1)`, its values are represented in EDN as the simple values `false` and `true`.
+If an enum appears that contains only the values `false (0)` and `true (1)`, its values are represented in EDN as the simple values `false` and `true`.
 
-Instances of other TLS-encoded enums are represented as their decimal integer values with an EDN end-of-line comment naming the enum and the item name.
+Instances of other TLS-encoded enums are represented as their decimal integer values with an EDN end-of-line comment naming the enum name and the item name.
 
 Instances of the following predefined TLS numeric types: uint16, uint32, uint64, plus any variable-length integers (widely used, for example in MLS {{Section 2.1.2 of ?RFC9420}}) are represented as unsigned decimal integers in EDN.
 Likewise a single instance of uint8 is represented as an unsigned decimal integer in EDN.
 
-Vectors of uint8 (or the `opaque` type) are represented by single quoted strings.
-Likewise fixed-length arrays of uint8 are represented by single quoted strings.
+Vectors of uint8 (or the `opaque` type) are represented by single quoted strings in EDN.
+Likewise fixed-length arrays of uint8 are represented by single quoted strings in EDN.
 By default, they are presented as hex-encoded single-quoted strings.
 If such sequences consist primarily of printable characters
 
 Vectors of any other type are represented by an array of that type.
 
-~~~ tls
+For example given the FooBar struct defined below:
 
+~~~ tls
+enum {
+  false(0),
+  true(1),
+  (255)
+} Bool;
+
+enum {
+  red(1),
+  yellow(2),
+  green(3)
+  (255)
+} Color;
+
+struct {
+  uint16 id;
+  uint8[16] nonce;
+  Bool active;
+  Color traffic_light_color;
+  uint32 divisible_by<V>;
+  opaque reason;
+} FooBar;
 ~~~
+
+an instance of that struct could be represented as follows in EDN:
 
 ~~~ cbor-diag
+# ~~~ tls FooBar
+{
+  "id": 16798,
+  "nonce": h'f6bafb33a535d1fd05bef225d2ac8f35',
+  "active": true,
+  "traffic_light_color": 3,   # Color green
+  "divisible_by": [3, 5, 11],
+  "reason": 'server down'
+}
+# ~~~
 ~~~
-
 
 ## Representation of Variants
 
@@ -119,7 +154,7 @@ An instance of Foo which has an optional Component would be represented by the f
 }
 ~~~
 
-When absent it would be represented:
+When absent it would be represented as:
 
 ~~~ cbor-diag
 {
@@ -131,7 +166,7 @@ When absent it would be represented:
 ~~~
 
 In general, the presence of a `select` construction in TLS PL indicates the conditional presence of additional values in the struct.
-For example, the struct below with a :
+For example, the struct below:
 
 ~~~ tls
 {
@@ -148,7 +183,7 @@ For example, the struct below with a :
 } PartialLeafNode;
 ~~
 
-would be presented as follows in EDN:
+would be represented as follows in EDN:
 
 ~~~ cbor-diag
 {
@@ -299,7 +334,7 @@ below is an example instance represented in EDN:
                             79f12cb1fa81218432268de12365c86c'
   },
   "capabilities": {
-    "versions": [1], # mls10
+    "versions": [1], # ProtocolVersion mls10
     "cipher_suites": [1, 2, 3, 7],
     "extensions": [
       0x0006,   # app_data_dictionary
