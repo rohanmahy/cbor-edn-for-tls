@@ -10,7 +10,7 @@ Expires: 6 November 2026
 
   Extended Diagnostic Notation (EDN) Use with Transport Layer Security
                 (TLS) Presentation Language (PL) Objects
-                     draft-cbor-edn-for-tls-latest
+                   draft-mahy-cbor-edn-for-tls-latest
 
 Abstract
 
@@ -24,9 +24,9 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://rohanmahy.github.io/cbor-edn-for-tls/draft-cbor-edn-for-
+   https://rohanmahy.github.io/cbor-edn-for-tls/draft-mahy-cbor-edn-for-
    tls.html.  Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-cbor-edn-for-tls/.
+   https://datatracker.ietf.org/doc/draft-mahy-cbor-edn-for-tls/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/rohanmahy/cbor-edn-for-tls.
@@ -256,7 +256,7 @@ Table of Contents
    The following detailed example represents the LeafNode struct from
    Section 7.2 of [RFC9420] and embedded structs.  It includes
    additional types from [I-D.ietf-mls-extensions],
-   [I-D.ietf-mimi-room-protocol], and [I-D.mahy-mls-sd-cwt-credential].
+   [I-D.ietf-mimi-room-policy], and [I-D.mahy-mls-sd-cwt-credential].
 
    Given the following TLS structures:
 
@@ -471,8 +471,12 @@ Table of Contents
               April 2026, <https://datatracker.ietf.org/doc/html/draft-
               ietf-mimi-protocol-06>.
 
-   [I-D.ietf-mimi-room-protocol]
-              "*** BROKEN REFERENCE ***".
+   [I-D.ietf-mimi-room-policy]
+              Mahy, R., "Room Policy for the More Instant Messaging
+              Interoperability (MIMI) Protocol", Work in Progress,
+              Internet-Draft, draft-ietf-mimi-room-policy-03, 18
+              December 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-mimi-room-policy-03>.
 
    [I-D.ietf-mls-extensions]
               Robert, R., "The Messaging Layer Security (MLS)
