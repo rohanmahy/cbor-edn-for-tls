@@ -205,7 +205,7 @@ It is ignored in the representation of an EDN instance.
 ## MLS LeafNode
 
 The following detailed example represents the LeafNode struct from {{Section 7.2 of ?RFC9420}} and embedded structs.
-It includes additional types from {{?I-D.ietf-mls-extensions}}, {{?I-D.ietf-mimi-room-protocol}}, and {{?I-D.mahy-mls-sd-cwt-credential}}.
+It includes additional types from {{?I-D.ietf-mls-extensions}}, {{?I-D.ietf-mimi-room-policy}}, and {{?I-D.mahy-mls-sd-cwt-credential}}.
 
 Given the following TLS structures:
 
