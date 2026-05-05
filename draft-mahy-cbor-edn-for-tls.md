@@ -3,7 +3,7 @@ title: "Extended Diagnostic Notation (EDN) Use with Transport Layer Security (TL
 abbrev: "EDN for TLS Presentation Language"
 category: info
 
-docname: draft-cbor-edn-for-tls-latest
+docname: draft-mahy-cbor-edn-for-tls-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
