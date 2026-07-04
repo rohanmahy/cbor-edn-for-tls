@@ -3,9 +3,9 @@
 
 
 Network Working Group                                            R. Mahy
-Internet-Draft                                                5 May 2026
+Internet-Draft                                               4 July 2026
 Intended status: Informational                                          
-Expires: 6 November 2026
+Expires: 5 January 2027
 
 
   Extended Diagnostic Notation (EDN) Use with Transport Layer Security
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2026.
+   This Internet-Draft will expire on 5 January 2027.
 
 Copyright Notice
 
@@ -133,11 +133,12 @@ Table of Contents
    unsigned decimal integers in EDN.  Likewise a single instance of
    uint8 is represented as an unsigned decimal integer in EDN.
 
-   Vectors of uint8 (or the opaque type) are represented by single
-   quoted strings in EDN.  Likewise fixed-length arrays of uint8 are
-   represented by single quoted strings in EDN.  By default, they are
-   presented as hex-encoded single-quoted strings.  If such sequences
-   consist primarily of printable characters
+   Vectors of uint8 (or the opaque type) are represented by byte strings
+   in EDN.  Likewise fixed-length arrays of uint8 are represented by
+   byte strings in EDN.  By default, they are presented as hex-encoded
+   single-quoted strings.  If such sequences consist entirely entirely
+   or substantially of printable characters they are represented as
+   (appropriately escaped) unprefixed single-quoted strings.
 
    Vectors of any other type are represented by an array of that type.
 
@@ -232,11 +233,9 @@ Table of Contents
        };
      Extension extensions<V>;
    } PartialLeafNode;
-   ~~
 
    would be represented as follows in EDN:
 
-   ~~~ cbor-diag
    {
      "leaf_node_source": 1, # enum LeafNodeSource.key_package
      "lifetime": {
@@ -442,11 +441,10 @@ Table of Contents
 7.1.  Normative References
 
    [I-D.ietf-cbor-edn-literals]
-              Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
-              Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
-              literals-23, 29 April 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              edn-literals-23>.
+              Bormann, C., "Concise Diagnostic Notation (CDN)", Work in
+              Progress, Internet-Draft, draft-ietf-cbor-edn-literals-26,
+              15 June 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-edn-literals-26>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -489,9 +487,9 @@ Table of Contents
               Mahy, R., "Messaging Layer Security Credentials using
               Selective Disclosure JSON and CBOR Web Tokens", Work in
               Progress, Internet-Draft, draft-mahy-mls-sd-cwt-
-              credential-01, 20 October 2025,
+              credential-02, 6 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-mahy-mls-sd-
-              cwt-credential-01>.
+              cwt-credential-02>.
 
    [RFC7094]  McPherson, D., Oran, D., Thaler, D., and E. Osterweil,
               "Architectural Considerations of IP Anycast", RFC 7094,
