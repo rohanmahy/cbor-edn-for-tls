@@ -74,10 +74,10 @@ Instances of other TLS-encoded enums are represented as their decimal integer va
 Instances of the following predefined TLS numeric types: uint16, uint32, uint64, plus any variable-length integers (widely used, for example in MLS {{Section 2.1.2 of ?RFC9420}}) are represented as unsigned decimal integers in EDN.
 Likewise a single instance of uint8 is represented as an unsigned decimal integer in EDN.
 
-Vectors of uint8 (or the `opaque` type) are represented by single quoted strings in EDN.
-Likewise fixed-length arrays of uint8 are represented by single quoted strings in EDN.
+Vectors of uint8 (or the `opaque` type) are represented by byte strings in EDN.
+Likewise fixed-length arrays of uint8 are represented by byte strings in EDN.
 By default, they are presented as hex-encoded single-quoted strings.
-If such sequences consist primarily of printable characters
+If such sequences consist entirely entirely or substantially of printable characters they are represented as (appropriately escaped) unprefixed single-quoted strings.
 
 Vectors of any other type are represented by an array of that type.
 
@@ -181,7 +181,7 @@ For example, the struct below:
     };
   Extension extensions<V>;
 } PartialLeafNode;
-~~
+~~~
 
 would be represented as follows in EDN:
 
